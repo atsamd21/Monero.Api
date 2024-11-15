@@ -258,7 +258,7 @@ public class MoneroWalletService : IMoneroWalletService
             ProcessStartInfo startInfo = new()
             {
                 FileName = isWindows ? Path.Combine(currentDirectory, "Programs", "./monero-wallet-rpc") : Path.Combine(currentDirectory, "Programs", "./monero-wallet-rpc"),
-                Arguments = $"--{_settings.Network} --daemon-address {_daemonAddress}:{_moneroRPCClient.Port - 1} --rpc-bind-port {_moneroRPCClient.Port} --wallet-dir {Path.Combine("Programs", "Wallets")} --disable-rpc-login --trusted-daemon --no-dns --log-level 4 --tx-notify \"{Path.Combine("Programs", isWindows ? Path.Combine("win-x86", "Fetch.exe") : Path.Combine("linux-x64", "Fetch"))} https://localhost:5100/api/notifications?transactionHash=%s key={_settings.APIKey}\"",
+                Arguments = $"{(_settings.Network != Network.Mainnet ? $"--{_settings.Network}" : "")} --daemon-address {_daemonAddress}:{_moneroRPCClient.Port - 1} --rpc-bind-port {_moneroRPCClient.Port} --wallet-dir {Path.Combine("Programs", "Wallets")} --disable-rpc-login {(_settings.UseRemoteNode ? "" : "--trusted-daemon")} --no-dns --log-level 4 --tx-notify \"{Path.Combine("Programs", isWindows ? Path.Combine("win-x86", "Fetch.exe") : Path.Combine("linux-x64", "Fetch"))} https://localhost:5100/api/notifications?transactionHash=%s key={_settings.APIKey}\"",
                 RedirectStandardOutput = true,
                 WorkingDirectory = currentDirectory
             };

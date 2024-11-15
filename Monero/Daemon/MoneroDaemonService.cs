@@ -84,7 +84,7 @@ public sealed class MoneroDaemonService : IMoneroDaemonService
             ProcessStartInfo startInfo = new()
             {
                 FileName = isWindows ? Path.Combine(currentDirectory, "Programs", "./monerod") : Path.Combine(currentDirectory, "Programs", "monerod"),
-                Arguments = $"--{_settings.Network} --data-dir={_settings.DataDirectory} --rpc-bind-port={_moneroRPCClient.Port} --no-zmq --out-peers=32 --hide-my-port --no-igd",
+                Arguments = $"{(_settings.Network != Network.Mainnet ? $"--{_settings.Network}" : "")} {(string.IsNullOrEmpty(_settings.DataDirectory) ? "" : $"--data-dir={_settings.DataDirectory}")} --rpc-bind-port={_moneroRPCClient.Port} --no-zmq --out-peers=32 --hide-my-port --no-igd",
                 RedirectStandardOutput = true,
                 WorkingDirectory = currentDirectory
             };
