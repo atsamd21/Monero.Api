@@ -25,8 +25,7 @@ The program can then be found in bin/Release/net8.0/[architecture]/publish. You 
 	1. Change the network to mainnet, and if using a local node, set the data directory to where the blockchain is stored on your computer.
 	2. Set the number of confirmations, (supports 0-conf) - the default is 10.
 	3. Change the first API key to something else, use a password generator or similar.
-	4. WalletRPCPassword is not used at the moment as it runs on the same machine and should not be port forwarded.
-	5. For BigCommerceSettings, set the APIKey and StoreHash/store id to the ones you got from the checkout setup and then save.
+	4. For BigCommerceSettings, set the APIKey and StoreHash/store id to the ones you got from the checkout setup and then save.
 
 2. Create a file (or use the one in the project) called moneroapiurl.json with the content below and change the address to the address of where the monero api will be running - use a vps or similar to host the api, this is so that the checkout can call the api.
 And then upload it to the content folder in the same way we uploaded the checkout folder earlier.

@@ -26,8 +26,4 @@ public class MoneroSettings
     /// 
     /// </summary>
     public string APIKey { get; set; } = string.Empty;
-    /// <summary>
-    /// 
-    /// </summary>
-    public string WalletRPCPassword { get; set; } = string.Empty;
 }
