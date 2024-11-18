@@ -31,9 +31,9 @@ The program can then be found in bin/Release/net8.0/[architecture]/publish. You 
 And then upload it to the content folder in the same way we uploaded the checkout folder earlier.
 
 {
-  "url": "https://[IP ADDRESS OF MONERO API SERVER]:5100/api"
+  "url": "https://[IP ADDRESS OF MONERO API SERVER]:5101/api"
 }
 
 ![alt text](https://i.ibb.co/cFTn94V/14.png)
 
-3. You can now run the Monero.Api program. You will need to forward port 5100.
+3. You can now run the Monero.Api program. You will need to forward port 5101.
