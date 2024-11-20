@@ -31,17 +31,27 @@ public class PaymentService : IPaymentService
         var existingPayment = await _db.Payments.FirstOrDefaultAsync(x => x.OrderId == request.OrderId);
         if (existingPayment is not null)
         {
-            response.Value = new()
+            if (existingPayment.Email == request.Email)
             {
-                Address = existingPayment.Address,
-                PaymentId = existingPayment.Id,
-                XMRAmount = existingPayment.XMRAmount,
-                PaymentState = existingPayment.PaymentState,
-            };
+                response.Value = new()
+                {
+                    Address = existingPayment.Address,
+                    PaymentId = existingPayment.Id,
+                    XMRAmount = existingPayment.XMRAmount,
+                    FiatAmount = existingPayment.FiatAmount,
+                    PaymentState = existingPayment.PaymentState.ToViewPaymentState(),
+                };
 
-            return response;
+                return response;
+            }
+            else 
+            {
+                response.Message = "Unauthorized.";
+                return response;
+            }
         }
 
+        // Else create payment
         var orderResponse = await _bigCommerceService.GetOrderAsync(request.OrderId);
         if (orderResponse.Value is null)
         {
@@ -93,7 +103,8 @@ public class PaymentService : IPaymentService
         {
             Address = createAddressResponse.Address,
             PaymentId = payment.Id,
-            XMRAmount = xmrAmount
+            XMRAmount = xmrAmount,
+            FiatAmount = amount
         };
 
         return response;

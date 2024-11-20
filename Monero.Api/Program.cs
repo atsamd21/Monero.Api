@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEntityFrameworkSqlite().AddDbContext<MoneroApiContext>();
 
+builder.Services.AddRazorPages();
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -60,12 +61,16 @@ if (app.Environment.IsDevelopment())
 app.UseMonero();
 
 app.UseMiddleware<ApiKeyMiddleware>();
+app.UseRouting();
 
+app.MapRazorPages();
 app.MapControllers();
+
 app.UseCors(x => x.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
 
-app.MigrateAndSeedDb<MoneroApiContext>();
+app.UseStaticFiles();
 
+app.MigrateAndSeedDb<MoneroApiContext>();
 app.Run();
 
 // For tests. Can be done from csproj too

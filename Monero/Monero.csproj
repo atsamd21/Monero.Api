@@ -10,15 +10,47 @@
     <None Remove="Programs\monero-wallet-rpc.exe" />
     <None Remove="Programs\monerod.exe" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Daemon\Requests\" />
-  </ItemGroup>
   
   <ItemGroup>
     <None Include="Programs\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Daemon\Requests\**" />
+    <EmbeddedResource Remove="Daemon\Requests\**" />
+    <None Remove="Daemon\Requests\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Remove="Programs\Fetch" />
+    <None Remove="Programs\Fetch.exe" />
+    <None Remove="Programs\monero-wallet-rpc" />
+    <None Remove="Programs\monero-wallet-rpc.exe" />
+    <None Remove="Programs\monerod" />
+    <None Remove="Programs\monerod.exe" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Include="Programs\Fetch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programs\Fetch.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programs\monero-wallet-rpc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programs\monero-wallet-rpc.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programs\monerod">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programs\monerod.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

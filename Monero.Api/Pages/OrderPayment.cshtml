@@ -1,0 +1,36 @@
+﻿@page
+@model OrderPayment
+
+@{
+    ViewData["Title"] = "Order payment";
+}
+
+<div class="main">
+    <p class="monero-text">Pay with Monero</p>
+    <div>
+        <p class="store" for="orderid">Store: @Model.Store</p>
+        <p class="email" for="orderid">Email: @Model.Email</p>
+        <p class="orderid" for="orderid">Order: #@Model.OrderId</p>
+
+        <label for="address">Address</label>
+        <textarea readonly="" rows="2" name="address" id="address" class="form-input optimizedCheckout-form-input address">@Model.CreatePaymentResponse.Address</textarea>
+        <label for="amount">Amount</label>
+        <input readonly="" name="amount" id="amount" class="form-input optimizedCheckout-form-input amount" value=@Model.CreatePaymentResponse.XMRAmount>
+        <label for="state">Status</label>
+        <input readonly="" name="state" id="state" class="form-input optimizedCheckout-form-input state" value=@Model.CreatePaymentResponse.PaymentState.ToString()>
+
+        <div class="qr-wrapper">
+            <div id="qrcode" class="qrcode"></div>
+            <img b-92pdz7gqva src="~/images/monero-logo-transparent.png" class="logo" />
+        </div>
+        <a class="openwallet" href=@($"monero:{Model.CreatePaymentResponse.Address}?tx_amount={Model.CreatePaymentResponse.XMRAmount}")>Open Monero wallet</a>
+    </div>
+</div>
+
+<script src="~/js/qrcode.min.js"></script>
+<script>
+    var qrcode = new QRCode("qrcode", {
+        text: "@($"monero:{Model.CreatePaymentResponse.Address}?tx_amount={Model.CreatePaymentResponse.XMRAmount}")",
+        correctLevel : QRCode.CorrectLevel.M
+    });
+</script>
