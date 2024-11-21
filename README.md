@@ -27,6 +27,8 @@ The program can then be found in bin/Release/net8.0/[architecture]/publish. You 
 	3. Change the first API key to something else, use a password generator or similar.
 	4. For BigCommerceSettings, set the APIKey and StoreHash/store id to the ones you got from the checkout setup and then save.
 
+1.5 On Linux you will probably need to set execute permissions on Monero.Api and the files in the Programs directory - Needs fixing
+
 2. Create a file (or use the one in the project) called moneroapiurl.json with the content below and change the address to the address of where the monero api will be running - use a vps or similar to host the api, this is so that the checkout can call the api.
 And then upload it to the content folder in the same way we uploaded the checkout folder earlier.
 ```json
