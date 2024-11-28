@@ -13,17 +13,23 @@ public class OrderPayment : PageModel
     public string Email { get; set; } = string.Empty;
     public string Store { get; set; } = string.Empty;
     public int OrderId { get; set; }
+    public bool IsEmbedded { get; set; }
 
     public OrderPayment(IPaymentService paymentService)
     {
         _paymentService = paymentService;
     }
 
-    public async Task<ActionResult> OnGetAsync(string email, int orderId, string store)
+    public async Task<ActionResult> OnGetAsync(string email, int orderId, string store, bool? isEmbedded)
     {
         var response = await _paymentService.CreatePaymentAsync(new CreatePaymentRequest { Email = email, OrderId = orderId });
         if (response.Value is null)
             return NotFound();
+
+        if (isEmbedded is not null)
+        {
+            IsEmbedded = isEmbedded.Value;
+        }
 
         CreatePaymentResponse = response.Value;
         Email = email;

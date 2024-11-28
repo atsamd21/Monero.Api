@@ -5,6 +5,15 @@
     ViewData["Title"] = "Order payment";
 }
 
+@if (Model.IsEmbedded)
+{
+    <style>
+        .monero-text, .store, .email, .orderid {
+            display: none;
+        }
+    </style>
+}
+
 <div class="main">
     <p class="monero-text">Pay with Monero</p>
     <div>
